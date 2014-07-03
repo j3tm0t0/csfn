@@ -1,0 +1,35 @@
+#!/bin/sh
+type coffee &> /dev/null || (echo ERROR: CoffeeScript is not installed. > /dev/stderr ; exit -1 )
+
+if [ "$1" = "" ]
+then
+  echo "usage: `basename $0` hoge.coffee [ puge.coffee ... ] > hogepuge.template"
+  echo ' or aws cloudformation create-stack --stack-name STACKNAME --template-body "$(csfn hoge.coffee)"'
+  exit 0
+fi
+
+(
+cat <<EOF
+Parameters={}
+Mappings={}
+Conditions={}
+Resources={}
+Outputs={}
+EOF
+
+cat $*
+
+cat <<EOF
+Template =
+  AWSTemplateFormatVersion : "2010-09-09"
+
+Template.Description=Description if Description?
+Template.Parameters=Parameters if Object.keys(Parameters).length > 0
+Template.Mappings=Mappings if Object.keys(Mappings).length > 0
+Template.Conditions=Conditions if Object.keys(Conditions).length > 0
+Template.Resources=Resources if Object.keys(Resources).length > 0
+Template.Outputs=Outputs if Object.keys(Outputs).length > 0
+
+console.log JSON.stringify(Template,null,"  ")
+EOF
+) | coffee -s
