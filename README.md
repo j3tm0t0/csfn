@@ -10,8 +10,9 @@ $ npm install -g csfn
 
 ## usage
 ```
-$ which csfn
-/Users/j3tm0t0/bin/csfn
+$ csfn
+usage: csfn hoge.coffee [ puge.coffee ... ] > hogepuge.template
+ or aws cloudformation create-stack --stack-name STACKNAME --template-body "$(csfn hoge.coffee)"
 
 # just convert .coffee to template json
 
@@ -42,7 +43,7 @@ arn:aws:cloudformation:ap-northeast-1:123456789012:stack/mybucket/5de182a0-fe91-
 
 ## what you can do with csfn
 + You can write templates more simple way (without tons of {} and ,)
-+ You can put comments in the template 
++ You can put comments in the template
 + You can use here document (handy for cloud-init userscript)
 
 ```
