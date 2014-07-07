@@ -4,7 +4,9 @@ csfn
 CoffeeScript + CloudFormation = CoffeeScriptFormation -> csfn
 
 ## installation
-save "csfn" file to some directory in the PATH.
+```
+$ npm install -g csfn
+```
 
 ## usage
 ```
