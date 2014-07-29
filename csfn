@@ -7,10 +7,12 @@ usage() {
   exit 0
 }
 
-while getopts I:h OPT
+while getopts I:e:h OPT
 do
   case $OPT in
     I)  OPT_I=$OPTARG
+      ;;
+    e)  OPT_e=$OPTARG
       ;;
     h)  usage
       ;;
@@ -34,6 +36,11 @@ Conditions={}
 Resources={}
 Outputs={}
 EOF
+
+if [ "$OPT_e" ];
+then
+  echo $OPT_e
+fi
 
 if [ "$OPT_I" ];
 then
