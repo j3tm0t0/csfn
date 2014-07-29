@@ -1,0 +1,29 @@
+{
+    "name": "csfn",
+    "version": "1.0.0",
+    "description": "CoffeeScript + CloudFormation = CoffeeScriptFormation -> csfn ",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/j3tm0t0/csfn.git"
+    },
+    "main": "./bin/csfn",
+    "bin": {
+        "csfn": "./bin/csfn"
+    },
+    "dependencies": {
+        "coffee-script": "*"
+    },
+    "keywords": [
+        "AWS",
+        "CloudFormation",
+        "CoffeeScript"
+    ],
+    "author": {
+        "email": "j3tm0t0@gmail.com"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/j3tm0t0/csfn/issues"
+    },
+    "homepage": "https://github.com/j3tm0t0/csfn"
+}
