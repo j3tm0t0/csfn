@@ -1,11 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 type coffee &> /dev/null || (echo ERROR: CoffeeScript is not installed. > /dev/stderr ; exit -1 )
+
+usage() {
+  echo "usage: `basename $0` [-I dir] hoge.coffee [ puge.coffee ... ] > hogepuge.template"
+  echo ' or aws cloudformation create-stack --stack-name STACKNAME --template-body "$(csfn hoge.coffee)"'
+  exit 0
+}
+
+while getopts I:h OPT
+do
+  case $OPT in
+    I)  OPT_I=$OPTARG
+      ;;
+    h)  usage
+      ;;
+    \?) usage
+      ;;
+  esac
+done
+
+shift $((OPTIND - 1))
 
 if [ "$1" = "" ]
 then
-  echo "usage: `basename $0` hoge.coffee [ puge.coffee ... ] > hogepuge.template"
-  echo ' or aws cloudformation create-stack --stack-name STACKNAME --template-body "$(csfn hoge.coffee)"'
-  exit 0
+ usage
 fi
 
 (
@@ -16,6 +34,15 @@ Conditions={}
 Resources={}
 Outputs={}
 EOF
+
+if [ "$OPT_I" ];
+then
+  include=`echo $OPT_I | sed 's/\/$//'`
+  if ls $include/*.coffee > /dev/null 2>&1
+  then
+    cat $include/*.coffee
+  fi
+fi
 
 cat $*
 
