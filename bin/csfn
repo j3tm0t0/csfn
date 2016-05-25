@@ -28,6 +28,7 @@ fi
 
 (
 cat <<EOF
+Metadata={}
 Parameters={}
 Mappings={}
 Conditions={}
@@ -51,6 +52,7 @@ Template =
   AWSTemplateFormatVersion : "2010-09-09"
 
 Template.Description=Description if Description?
+Template.Metadata=Metadata if Object.keys(Metadata).length > 0
 Template.Parameters=Parameters if Object.keys(Parameters).length > 0
 Template.Mappings=Mappings if Object.keys(Mappings).length > 0
 Template.Conditions=Conditions if Object.keys(Conditions).length > 0
